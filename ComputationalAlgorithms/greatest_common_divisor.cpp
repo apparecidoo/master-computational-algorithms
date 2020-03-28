@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "greatest_common_divisor.h"
 
-GreatestCommonDivisor::GreatestCommonDivisor(int first, int second)
+GreatestCommonDivisor::GreatestCommonDivisor(double first, double second)
 {
 	if (first > second) {
 		_major = first;
@@ -17,32 +17,59 @@ GreatestCommonDivisor::~GreatestCommonDivisor()
 {
 }
 
-int GreatestCommonDivisor::SolveRecursive(int major, int minor)
+double GreatestCommonDivisor::SolveRecursive(double major, double minor)
 {
 	if (minor == 0)
 		return major;
 
-	return SolveRecursive(minor, major % minor);
+	return SolveRecursive(minor, std::fmod(major,minor));
 }
 
 int GreatestCommonDivisor::Solve(bool recursive)
 {
-	int auxMajor = _major;
-	int auxMinor = _minor;
+	double auxMajor = _major;
+	double auxMinor = _minor;
 
 	if (recursive) {
 		return SolveRecursive(auxMajor, auxMinor);
 	}
 	else {
-		int result = 1;
+		double result = 1;
 
 		while (result != 0)
 		{
-			result = auxMajor % auxMinor;
+			result = std::fmod(auxMajor, auxMinor);
 			auxMajor = auxMinor;
 			auxMinor = result;
 		}
 
 		return auxMajor;
+	}
+}
+
+void GreatestCommonDivisor::Test()
+{
+	int i = 0;
+	std::chrono::time_point<chrono::steady_clock> tStart;
+	random_device rd;
+	mt19937 eng(rd());
+	uniform_real_distribution<double> randGcd(1000, 99999999);
+	cout.setf(ios::fixed);
+
+	while (i < 20)
+	{
+		double firstNumber = (int)randGcd(eng);
+		double secondNumber = (int)randGcd(eng);
+		GreatestCommonDivisor test = GreatestCommonDivisor(firstNumber, secondNumber);
+		cout << "Numbers: (" << setprecision(0) << firstNumber << ", " << secondNumber << ")" << endl;
+		tStart = std::chrono::high_resolution_clock::now();
+		double solve = test.Solve();
+		cout << "Result: " << setprecision(0) << solve << " | TimeExecution: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - tStart).count() << " microseconds" << endl;
+
+		tStart = std::chrono::high_resolution_clock::now();
+		double solveRecursive = test.Solve(true);
+		cout << "Result Recursive: " << setprecision(0) << solveRecursive << " | TimeExecution: " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - tStart).count() << " microseconds" << endl << endl;
+
+		i++;
 	}
 }

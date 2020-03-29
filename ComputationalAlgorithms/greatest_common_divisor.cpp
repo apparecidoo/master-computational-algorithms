@@ -25,6 +25,20 @@ double GreatestCommonDivisor::SolveRecursive(double major, double minor)
 	return SolveRecursive(minor, std::fmod(major,minor));
 }
 
+double GreatestCommonDivisor::SolveIterative(double major, double minor)
+{
+	double result = 1;
+
+	while (result != 0)
+	{
+		result = std::fmod(major, minor);
+		major = minor;
+		minor = result;
+	}
+
+	return major;
+}
+
 int GreatestCommonDivisor::Solve(bool recursive)
 {
 	double auxMajor = _major;
@@ -34,16 +48,7 @@ int GreatestCommonDivisor::Solve(bool recursive)
 		return SolveRecursive(auxMajor, auxMinor);
 	}
 	else {
-		double result = 1;
-
-		while (result != 0)
-		{
-			result = std::fmod(auxMajor, auxMinor);
-			auxMajor = auxMinor;
-			auxMinor = result;
-		}
-
-		return auxMajor;
+		return SolveIterative(auxMajor, auxMinor);
 	}
 }
 

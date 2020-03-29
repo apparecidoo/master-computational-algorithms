@@ -16,7 +16,8 @@ class GreatestCommonDivisor {
 private:
 	double _major;
 	double _minor;
-	double SolveRecursive(double first, double second);
+	double SolveRecursive(double major, double minor);
+	double SolveIterative(double major, double minor);
 
 public:
 	GreatestCommonDivisor(double first, double second);

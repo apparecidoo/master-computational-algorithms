@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <chrono>
-#include <random>
+#include "random.h"
 #include <iomanip>
 
 #ifndef GREATEST_COMMON_DIVISOR_H

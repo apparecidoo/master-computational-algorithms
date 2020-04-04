@@ -56,15 +56,12 @@ void GreatestCommonDivisor::Test()
 {
 	int i = 0;
 	std::chrono::time_point<chrono::steady_clock> tStart;
-	random_device rd;
-	mt19937 eng(rd());
-	uniform_real_distribution<double> randGcd(1000, 99999999);
 	cout.setf(ios::fixed);
 
 	while (i < 20)
 	{
-		double firstNumber = (int)randGcd(eng);
-		double secondNumber = (int)randGcd(eng);
+		double firstNumber = Random().generate(1000, 999999999);
+		double secondNumber = Random().generate(1000, 999999999);
 		GreatestCommonDivisor test = GreatestCommonDivisor(firstNumber, secondNumber);
 		cout << "Numbers: (" << setprecision(0) << firstNumber << ", " << secondNumber << ")" << endl;
 		tStart = std::chrono::high_resolution_clock::now();

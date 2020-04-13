@@ -5,12 +5,14 @@
 #include <iomanip>
 #include "greatest_common_divisor.h"
 #include "sort.h"
+#include "graph.h"
 
 using namespace std;
 
 int main()
 {
-	Sort<int>().Test();
+	Graph* test = new Graph(0);
+	test->TestDijkstra();
 
 	system("pause");
 }

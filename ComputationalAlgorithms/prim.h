@@ -12,7 +12,7 @@ private:
 	int _startVertex;
 	int _graphSize;
 
-	int MinKey(T vKey[], bool vSolution[]);
+	int MinKey(T vKey[], bool vExplored[]);
 
 public:
 	Prim(T** graph, int graphSize, int startVertex = 0);
@@ -24,13 +24,13 @@ public:
 #endif
 
 template<class T>
-inline int Prim<T>::MinKey(T vKey[], bool vSolution[])
+inline int Prim<T>::MinKey(T vKey[], bool vExplored[])
 {
 	int minValue = INT_MAX;
 	int minIndex;
 
 	for (int v = 0; v < _graphSize; v++) {
-		if (!vSolution[v] && vKey[v] < minValue) {
+		if (!vExplored[v] && vKey[v] < minValue) {
 			minValue = vKey[v];
 			minIndex = v;
 		}
@@ -52,11 +52,11 @@ inline T * Prim<T>::Run()
 {
 	T* vResult = new T[_graphSize]; // array of final solution
 	T* vKey = new T[_graphSize]; // array of minimium edge
-	bool* vSolution = new bool[_graphSize]; // array of vertices are part of final solution
+	bool* vExplored = new bool[_graphSize]; // array of vertices are explored
 
 	for (int i = 0; i < _graphSize; i++) {
 		vKey[i] = INT_MAX;
-		vSolution[i] = false;
+		vExplored[i] = false;
 	}
 
 	vKey[0] = 0;
@@ -64,12 +64,12 @@ inline T * Prim<T>::Run()
 
 	for (int i = 0; i < _graphSize - 1; i++)
 	{
-		int u = MinKey(vKey, vSolution);
-		vSolution[u] = true;
+		int u = MinKey(vKey, vExplored);
+		vExplored[u] = true;
 
 		for (int v = 0; v < _graphSize; v++) {
-			// check if has connection, if is not solution yet and if is the mininum weight
-			if (_graph[u][v] && !vSolution[v] && _graph[u][v] < vKey[v]) {
+			// check if has connection, if is not explored yet and if is the mininum weight
+			if (_graph[u][v] && !vExplored[v] && _graph[u][v] < vKey[v]) {
 				vResult[v] = u;
 				vKey[v] = _graph[u][v];
 			}

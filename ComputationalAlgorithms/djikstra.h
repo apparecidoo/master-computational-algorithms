@@ -12,7 +12,7 @@ private:
 	int _startVertex;
 	int _graphSize;
 
-	int MinDistance(T vDistance[], bool vDjkSolution[]);
+	int MinDistance(T vDistance[], bool vExplored[]);
 
 public:
 	Dijkstra(T** graph, int graphSize, int startVertex = 0);
@@ -24,13 +24,13 @@ public:
 #endif
 
 template<class T>
-inline int Dijkstra<T>::MinDistance(T vDistance[], bool vDjkSolution[])
+inline int Dijkstra<T>::MinDistance(T vDistance[], bool vExplored[])
 {
 	T minValue = INT_MAX;
 	int minIndex;
 
 	for (int v = 0; v < _graphSize; v++) {
-		if (!vDjkSolution[v] && vDistance[v] <= minValue) {
+		if (!vExplored[v] && vDistance[v] <= minValue) {
 			minValue = vDistance[v];
 			minIndex = v;
 		}
@@ -51,22 +51,22 @@ template<class T>
 inline T * Dijkstra<T>::Run()
 {
 	T* vDistance = new T[_graphSize]; // The final solution with the shortest distance
-	bool* vDjkSolution = new bool[_graphSize]; // array of vertices are part of final solution or finalized
+	bool* vExplored = new bool[_graphSize]; // array of vertices are part explored or finalized
 
 	for (int i = 0; i < _graphSize; i++) {
 		vDistance[i] = INT_MAX;
-		vDjkSolution[i] = false;
+		vExplored[i] = false;
 	}
 
 	vDistance[_startVertex] = 0;
 
 	for (int i = 0; i < _graphSize - 1; i++) {
-		int u = MinDistance(vDistance, vDjkSolution);
-		vDjkSolution[u] = true;
+		int u = MinDistance(vDistance, vExplored);
+		vExplored[u] = true;
 
 		for (int v = 0; v < _graphSize; v++) {
-			// check if has connection, if is not solution yet and if is the mininum distance
-			if (_graph[u][v] && !vDjkSolution[v] && vDistance[u] != INT_MAX
+			// check if has connection, if is not explored yet and if is the mininum distance
+			if (_graph[u][v] && !vExplored[v] && vDistance[u] != INT_MAX
 				&& vDistance[u] + _graph[u][v] < vDistance[v]) {
 				vDistance[v] = vDistance[u] + _graph[u][v];
 			}

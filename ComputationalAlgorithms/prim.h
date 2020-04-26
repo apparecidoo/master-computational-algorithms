@@ -18,7 +18,7 @@ public:
 	Prim(T** graph, int graphSize, int startVertex = 0);
 
 	T* Run();
-	void Print(T* vResult);
+	void Print(T vDistance[]);
 };
 
 #endif
@@ -62,16 +62,16 @@ inline T * Prim<T>::Run()
 	vKey[0] = 0;
 	vResult[0] = NULL;
 
-	for (int i = 0; i < _graphSize - 1; i++)
+	for (int i = 0; i < _graphSize - 1; i++) // each vertex
 	{
 		int u = MinKey(vKey, vExplored);
 		vExplored[u] = true;
 
-		for (int v = 0; v < _graphSize; v++) {
+		for (int j = 0; j < _graphSize; j++) { // update each value vertex
 			// check if has connection, if is not explored yet and if is the mininum weight
-			if (_graph[u][v] && !vExplored[v] && _graph[u][v] < vKey[v]) {
-				vResult[v] = u;
-				vKey[v] = _graph[u][v];
+			if (_graph[u][j] && !vExplored[j] && _graph[u][j] < vKey[j]) {
+				vResult[j] = u;
+				vKey[j] = _graph[u][j];
 			}
 		}
 	}
@@ -80,10 +80,10 @@ inline T * Prim<T>::Run()
 }
 
 template<class T>
-inline void Prim<T>::Print(T * vResult)
+inline void Prim<T>::Print(T vDistance[])
 {
 	cout << "Edge (from to) \t\tWeight" << endl;
 	for (int i = 0; i < _graphSize; i++) {
-		cout << vResult[i] << " - " << i << " \t\t\t " << _graph[i][vResult[i]] << endl;
+		cout << vDistance[i] << " - " << i << " \t\t\t " << _graph[i][vDistance[i]] << endl;
 	}
 }

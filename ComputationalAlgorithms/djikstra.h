@@ -60,15 +60,15 @@ inline T * Dijkstra<T>::Run()
 
 	vDistance[_startVertex] = 0;
 
-	for (int i = 0; i < _graphSize - 1; i++) {
+	for (int i = 0; i < _graphSize - 1; i++) { // each vertex
 		int u = MinDistance(vDistance, vExplored);
 		vExplored[u] = true;
 
-		for (int v = 0; v < _graphSize; v++) {
+		for (int j = 0; j < _graphSize; j++) { // update each vertex value that has connection
 			// check if has connection, if is not explored yet and if is the mininum distance
-			if (_graph[u][v] && !vExplored[v] && vDistance[u] != INT_MAX
-				&& vDistance[u] + _graph[u][v] < vDistance[v]) {
-				vDistance[v] = vDistance[u] + _graph[u][v];
+			if (_graph[u][j] && !vExplored[j] && vDistance[u] != INT_MAX
+				&& vDistance[u] + _graph[u][j] < vDistance[j]) {
+				vDistance[j] = vDistance[u] + _graph[u][j];
 			}
 		}
 	}

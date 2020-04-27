@@ -73,17 +73,17 @@ void Graph::TestPrim()
 	int* vResult = this->RunPrim();
 	Prim<int>(NULL, 0, 0).Print(vResult);*/
 
-	string vSparseDense[2] = { "dense", "sparse" };
+	string vSparseDense[2] = { "sparse", "dense" };
 	string vDirectionalUndirectional[2] = { "directional", "undirectional" };
 	int runTimes = 10;
 	int runEachTimes = 500;
 	std::chrono::time_point<chrono::steady_clock> tStart;
-	this->_numberVertices = 200;
 
 	for (int d = 0; d < 2; d++) // directional and undirectional
 	{
 		for (int s = 0; s < 2; s++) // sparse and dense
 		{
+			this->_numberVertices = 200;
 			cout << vSparseDense[s] << " graph - " << vDirectionalUndirectional[d] << endl;
 
 			for (int i = 0; i < runTimes; i++)
@@ -95,25 +95,27 @@ void Graph::TestPrim()
 				{
 					for (int c = 0; c < this->_numberVertices; c++)
 					{
-						if (d == 0) { // directional
-							if (s == 0) { // sparse
-								if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
-									AddEdge(r, c, Random().generate(1, 1000), false);
-								}
-							}
-							else { // dense
-								AddEdge(r, c, Random().generate(1, 1000), false);
-							}
-						}
-						else { // undirectional
-							if (_graph[r][c] == NULL) {
+						if (r != c) {
+							if (d == 0) { // directional
 								if (s == 0) { // sparse
 									if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
-										AddEdge(r, c, Random().generate(1, 1000), true);
+										AddEdge(r, c, Random().generate(1, 1000), false);
 									}
 								}
 								else { // dense
-									AddEdge(r, c, Random().generate(1, 1000), true);
+									AddEdge(r, c, Random().generate(1, 1000), false);
+								}
+							}
+							else { // undirectional
+								if (_graph[r][c] == NULL) {
+									if (s == 0) { // sparse
+										if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
+											AddEdge(r, c, Random().generate(1, 1000), true);
+										}
+									}
+									else { // dense
+										AddEdge(r, c, Random().generate(1, 1000), true);
+									}
 								}
 							}
 						}
@@ -160,17 +162,17 @@ void Graph::TestDijkstra()
 	int* vResult = this->RunDijkstra();
 	Dijkstra<int>(NULL, 0, 0).Print(vResult);*/
 
-	string vSparseDense[2] = { "dense", "sparse" };
+	string vSparseDense[2] = { "sparse", "dense" };
 	string vDirectionalUndirectional[2] = { "directional", "undirectional" };
 	int runTimes = 10;
 	int runEachTimes = 500;
 	std::chrono::time_point<chrono::steady_clock> tStart;
-	this->_numberVertices = 200;
 
 	for (int d = 0; d < 2; d++) // directional and undirectional
 	{
 		for (int s = 0; s < 2; s++) // sparse and dense
 		{
+			this->_numberVertices = 200;
 			cout << vSparseDense[s] << " graph - " << vDirectionalUndirectional[d] << endl;
 
 			for (int i = 0; i < runTimes; i++)
@@ -182,25 +184,27 @@ void Graph::TestDijkstra()
 				{
 					for (int c = 0; c < this->_numberVertices; c++)
 					{
-						if (d == 0) { // directional
-							if (s == 0) { // sparse
-								if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
-									AddEdge(r, c, Random().generate(1, 1000), false);
-								}
-							}
-							else { // dense
-								AddEdge(r, c, Random().generate(1, 1000), false);
-							}
-						}
-						else { // undirectional
-							if (_graph[r][c] == NULL) {
+						if (r != c) {
+							if (d == 0) { // directional
 								if (s == 0) { // sparse
 									if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
-										AddEdge(r, c, Random().generate(1, 1000), true);
+										AddEdge(r, c, Random().generate(1, 1000), false);
 									}
 								}
 								else { // dense
-									AddEdge(r, c, Random().generate(1, 1000), true);
+									AddEdge(r, c, Random().generate(1, 1000), false);
+								}
+							}
+							else { // undirectional
+								if (_graph[r][c] == NULL) {
+									if (s == 0) { // sparse
+										if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
+											AddEdge(r, c, Random().generate(1, 1000), true);
+										}
+									}
+									else { // dense
+										AddEdge(r, c, Random().generate(1, 1000), true);
+									}
 								}
 							}
 						}

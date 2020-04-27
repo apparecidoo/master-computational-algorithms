@@ -1,6 +1,10 @@
 #include <iostream>
 #include "djikstra.h"
 #include "prim.h"
+#include "helper.h"
+#include "random.h"
+#include <chrono>
+#include <string>
 
 #ifndef GRAPH_H
 #define GRAPH_H
@@ -11,7 +15,8 @@ class Graph {
 private:
 	int** _graph;
 	int _startVertex;
-	int _graphSize;
+	int _numberVertices;
+	int _numberEdges;
 
 	void Initialize();
 

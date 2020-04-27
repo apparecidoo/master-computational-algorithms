@@ -21,8 +21,6 @@ public:
 	void Print(T vDistance[]);
 };
 
-#endif
-
 template<class T>
 inline int Prim<T>::MinKey(T vKey[], bool vExplored[])
 {
@@ -87,3 +85,5 @@ inline void Prim<T>::Print(T vDistance[])
 		cout << vDistance[i] << " - " << i << " \t\t\t " << _graph[i][vDistance[i]] << endl;
 	}
 }
+
+#endif

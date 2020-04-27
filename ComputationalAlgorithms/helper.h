@@ -11,8 +11,6 @@ public:
 	static void Copy(T from[], T to[], int size);
 };
 
-#endif
-
 template<class T>
 inline void Helper<T>::Copy(T from[], T to[], int size)
 {
@@ -21,3 +19,5 @@ inline void Helper<T>::Copy(T from[], T to[], int size)
 		to[i] = from[i];
 	}
 }
+
+#endif

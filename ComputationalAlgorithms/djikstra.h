@@ -21,8 +21,6 @@ public:
 	void Print(T vDistance[]);
 };
 
-#endif
-
 template<class T>
 inline int Dijkstra<T>::MinDistance(T vDistance[], bool vExplored[])
 {
@@ -84,3 +82,5 @@ inline void Dijkstra<T>::Print(T vDistance[])
 		cout << i << " \t\t " << vDistance[i] << endl;
 	}
 }
+
+#endif

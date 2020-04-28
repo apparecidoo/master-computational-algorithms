@@ -74,7 +74,7 @@ void Graph::TestPrim()
 	Prim<int>(NULL, 0, 0).Print(vResult);*/
 
 	string vSparseDense[2] = { "sparse", "dense" };
-	int runTimes = 10;
+	int runTimes = 15;
 	int runEachTimes = 500;
 	std::chrono::time_point<chrono::steady_clock> tStart;
 
@@ -95,7 +95,18 @@ void Graph::TestPrim()
 					if (r != c) {
 						if (_graph[r][c] == NULL) {
 							if (s == 0) { // sparse
-								if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
+								int edges = 0;
+								int j = 0;
+								for (int j = 0; j < _numberVertices; j++)
+								{
+									if (_graph[r][j] != NULL) {
+										edges++;
+									}
+									if (edges == 2) {
+										break;
+									}
+								}
+								if (edges < 2) {
 									AddEdge(r, c, Random().generate(1, 1000), true);
 								}
 							}
@@ -148,7 +159,7 @@ void Graph::TestDijkstra()
 
 	string vSparseDense[2] = { "sparse", "dense" };
 	string vDirectionalUndirectional[2] = { "directional", "undirectional" };
-	int runTimes = 10;
+	int runTimes = 15;
 	int runEachTimes = 500;
 	std::chrono::time_point<chrono::steady_clock> tStart;
 
@@ -171,7 +182,18 @@ void Graph::TestDijkstra()
 						if (r != c) {
 							if (d == 0) { // directional
 								if (s == 0) { // sparse
-									if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
+									int edges = 0;
+									int j = 0;
+									for (int j = 0; j < _numberVertices; j++)
+									{
+										if (_graph[r][j] != NULL) {
+											edges++;
+										}
+										if (edges == 2) {
+											break;
+										}
+									}
+									if (edges < 2) {
 										AddEdge(r, c, Random().generate(1, 1000), false);
 									}
 								}
@@ -182,7 +204,18 @@ void Graph::TestDijkstra()
 							else { // undirectional
 								if (_graph[r][c] == NULL) {
 									if (s == 0) { // sparse
-										if (r % 3 == 0 || r % 2 != 0) { // add if r % 3 = 0 and if is odd
+										int edges = 0;
+										int j = 0;
+										for (int j = 0; j < _numberVertices; j++)
+										{
+											if (_graph[r][j] != NULL) {
+												edges++;
+											}
+											if (edges == 2) {
+												break;
+											}
+										}
+										if (edges < 2) {
 											AddEdge(r, c, Random().generate(1, 1000), true);
 										}
 									}

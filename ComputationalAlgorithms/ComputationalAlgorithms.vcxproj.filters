@@ -21,6 +21,9 @@
     <Filter Include="Source Files\algorithms">
       <UniqueIdentifier>{a24723da-3f6b-4974-ac63-56cc8de83f7a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\entities">
+      <UniqueIdentifier>{b7cb955e-620f-41b5-9334-0fe714e1971f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -47,6 +50,12 @@
     <ClInclude Include="prim.h">
       <Filter>Header Files\algorithms</Filter>
     </ClInclude>
+    <ClInclude Include="chain_matrix_multiplication.h">
+      <Filter>Header Files\algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -60,6 +69,9 @@
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
     <ClCompile Include="graph.cpp">
+      <Filter>Source Files\algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="chain_matrix_multiplication.cpp">
       <Filter>Source Files\algorithms</Filter>
     </ClCompile>
   </ItemGroup>

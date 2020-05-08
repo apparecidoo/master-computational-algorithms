@@ -21,7 +21,9 @@ private:
 	Matrix<int>** _matrices;
 
 	void Initialize();
-	void Minimize(int i, int j);
+	int Minimize(int i, int j);
+	void PrintResults();
+	string ReadResult(int i, int j, char &name);
 
 public:
 	ChainMatrixMultiplication(int numberMatrices);

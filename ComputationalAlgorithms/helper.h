@@ -11,6 +11,7 @@ public:
 	static void Copy(T from[], T to[], int size);
 	static T** MatrixMultiplication(T** m1, T** m2, int m1_row, int m1_col, int m2_row, int m2_col);
 	static T** CreateMatrix(int row, int col, bool randomValues = false);
+	static void PrintMatrix(T** m, int row, int col);
 };
 
 template<class T>
@@ -48,15 +49,33 @@ inline T** Helper<T>::CreateMatrix(int row, int col, bool randomValues)
 	
 	for (int i = 0; i < row; i++)
 	{
-		matrix[row] = new T[col];
+		matrix[i] = new T[col];
 
 		for (int j = 0; j < col; j++)
 		{
-			matrix[row][col] = randomValues ? (T)Random().generate(1, 1000) : NULL;
+			matrix[i][j] = randomValues ? (T)Random().generate(1, 1000) : NULL;
 		}
 	}
 
 	return matrix;
+}
+
+template<class T>
+inline void Helper<T>::PrintMatrix(T ** m, int row, int col)
+{
+	cout << "Matrix " << row << "x" << col << endl;
+	
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			cout << m[i][j] << "\t";
+		}
+
+		cout << endl;
+	}
+	
+	cout << endl;
 }
 
 #endif

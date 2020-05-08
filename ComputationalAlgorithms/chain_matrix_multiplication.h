@@ -22,14 +22,15 @@ private:
 
 	void Initialize();
 	int Minimize(int i, int j);
-	void PrintResults();
 	string ReadResult(int i, int j, char &name);
+	void AddFakeMatrix(int row, int col);
 
 public:
 	ChainMatrixMultiplication(int numberMatrices);
 	void AddRandomMatrix(int row, int col);
 	void AddMatrix(int** m, int row, int col);
-	void GetSolution();
+	int Run(); // return the min value of multiplications
+	void PrintResults();
 	void Test();
 };
 

@@ -9,3 +9,6 @@ Atividade 2
 
 Atividade 3
   - Implemente os algoritmos Prim e Dijkstra. (prim.h, dijkstra.h, graph.h)
+
+Atividade 4
+  - Implemente o algoritmos Multiplicação de Cadeia de Matrizes. (chain_matrix_multiplication.h)

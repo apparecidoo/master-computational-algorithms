@@ -4,10 +4,10 @@
 void ChainMatrixMultiplication::Initialize()
 {
 	_numberMatricesAdded = 0;
-	_matrices = new Matrix<int>*[_numberMatrices + 1];
-	_mS = Helper<int>().CreateMatrix(_numberMatrices + 1, _numberMatrices + 1);
-	_mResult = Helper<int>().CreateMatrix(_numberMatrices + 1, _numberMatrices + 1);
-	_vP = new int[_numberMatrices + 1];
+	_matrices = new Matrix<long long int>*[_numberMatrices + 1];
+	_mS = Helper<long long int>().CreateMatrix(_numberMatrices + 1, _numberMatrices + 1);
+	_mResult = Helper<long long int>().CreateMatrix(_numberMatrices + 1, _numberMatrices + 1);
+	_vP = new long long int[_numberMatrices + 1];
 }
 
 int ChainMatrixMultiplication::Minimize(int i, int j)
@@ -64,7 +64,7 @@ string ChainMatrixMultiplication::ReadResult(int i, int j, char &name)
 void ChainMatrixMultiplication::AddFakeMatrix(int row, int col)
 {
 	if (_numberMatricesAdded != _numberMatrices) {
-		_matrices[_numberMatricesAdded + 1] = new Matrix<int>(NULL, row, col);
+		_matrices[_numberMatricesAdded + 1] = new Matrix<long long int>(NULL, row, col);
 		_numberMatricesAdded++;
 	}
 }
@@ -77,18 +77,18 @@ ChainMatrixMultiplication::ChainMatrixMultiplication(int numberMatrices)
 
 void ChainMatrixMultiplication::AddRandomMatrix(int row, int col)
 {
-	int** m = Helper<int>().CreateMatrix(row, col, true);
+	long long int** m = Helper<long long int>().CreateMatrix(row, col, true);
 
 	if (_numberMatricesAdded != _numberMatrices) {
-		_matrices[_numberMatricesAdded + 1] = new Matrix<int>(m, row, col);
+		_matrices[_numberMatricesAdded + 1] = new Matrix<long long int>(m, row, col);
 		_numberMatricesAdded++;
 	}
 }
 
-void ChainMatrixMultiplication::AddMatrix(int ** m, int row, int col)
+void ChainMatrixMultiplication::AddMatrix(long long int ** m, int row, int col)
 {
 	if (_numberMatricesAdded != _numberMatrices) {
-		_matrices[_numberMatricesAdded + 1] = new Matrix<int>(m, row, col);
+		_matrices[_numberMatricesAdded + 1] = new Matrix<long long int>(m, row, col);
 		_numberMatricesAdded++;
 	}
 }
@@ -112,9 +112,11 @@ int ChainMatrixMultiplication::Run()
 void ChainMatrixMultiplication::PrintResults()
 {
 	cout << "=== Matrices ===" << endl;
+	char name = 'A';
 	for (int i = 1; i <= _numberMatrices; i++)
 	{
-		cout << "Matrix[" << i << "] = " << _matrices[i]->row << "x" << _matrices[i]->col << endl;
+		cout << "Matrix " << name << " = " << _matrices[i]->row << "x" << _matrices[i]->col << endl;
+		name++;
 	}
 
 	cout << endl << "=== Vector of P's ===" << endl;
@@ -125,16 +127,16 @@ void ChainMatrixMultiplication::PrintResults()
 	}
 
 	cout << endl << endl << "=== Matrix of Min Values ===" << endl;
-	Helper<int>().PrintMatrix(_mResult, _numberMatrices + 1, _numberMatrices + 1);
+	Helper<long long int>().PrintMatrix(_mResult, _numberMatrices + 1, _numberMatrices + 1);
 
 	cout << "=== Matrix of Min K's ===" << endl;
-	Helper<int>().PrintMatrix(_mS, _numberMatrices + 1, _numberMatrices + 1);
+	Helper<long long int>().PrintMatrix(_mS, _numberMatrices + 1, _numberMatrices + 1);
 
 	cout << "=== Min Value ===" << endl;
 	cout << "Value: " << _mResult[1][_numberMatrices] << endl;
 
 	cout << endl << "=== Sequence Result ===" << endl;
-	char name = 'A';
+	name = 'A';
 	cout << ReadResult(1, _numberMatrices, name) << endl << endl;
 }
 
@@ -182,8 +184,8 @@ void ChainMatrixMultiplication::Test()
 
 	for (int i = 0; i < tests; i++)
 	{
-		int variation = (200 * i);
-		_numberMatrices = 10 + (i * 200);
+		int variation = (100 * i);
+		_numberMatrices = 10 + variation;
 		Initialize();
 
 		int lastSizeRow = Random().generate(100 + variation, 1000 + variation);

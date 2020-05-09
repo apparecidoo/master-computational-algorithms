@@ -13,12 +13,12 @@ using namespace std;
 
 class ChainMatrixMultiplication {
 private:
-	int* _vP; // vector of p's
-	int** _mResult; // matrix resulting
-	int** _mS; // matrix of k's
+	long long int* _vP; // vector of p's
+	long long int** _mResult; // matrix resulting
+	long long int** _mS; // matrix of k's
 	int _numberMatrices;
 	int _numberMatricesAdded;
-	Matrix<int>** _matrices;
+	Matrix<long long int>** _matrices;
 
 	void Initialize();
 	int Minimize(int i, int j);
@@ -28,7 +28,7 @@ private:
 public:
 	ChainMatrixMultiplication(int numberMatrices);
 	void AddRandomMatrix(int row, int col);
-	void AddMatrix(int** m, int row, int col);
+	void AddMatrix(long long int** m, int row, int col);
 	int Run(); // return the min value of multiplications
 	void PrintResults();
 	void Test();
